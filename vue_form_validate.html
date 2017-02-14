@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+    <script src="./assets/vue/vue.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="col-md-4 col-md-offset-4">
+                <form v-form name="myform" @submit.prevent="onSubmit" role="form">
+                  <legend class="text-center">Vue-form demo</legend>
+                    <div class="form-group">
+                         <label>用户名*</label>
+                            <input class="form-control" v-model="model.name" v-form-ctrl required name="name" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>邮箱*</label>
+                            <input class="form-control" v-model="model.email" v-form-ctrl name="email" type="email" required />
+                        
+                    </div>
+                    <div class="errors" v-if="myform.$submitted">
+                        <p class="bg-danger text-center" v-if="myform.name.$error.required">请输入用户名.</p>
+                        <p class="bg-danger text-center" v-if="myform.email.$error.email">请输入正确的邮箱.</p>
+                    </div>
+                    <button class="btn btn-success btn-block" type="submit">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        myform: {},
+        model: {}
+    },
+    methods: {
+        onSubmit: function() {
+            console.log(this.myform.$valid);
+            if(this.myform.$valid==true)
+                alert("提交成功");
+        }
+    }
+});
+</script>
+</body>
+</html>
